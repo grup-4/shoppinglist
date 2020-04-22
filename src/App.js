@@ -2,9 +2,10 @@
 
 import React from "react";
 import "./App.css";
-import Regis from "./components/register/Register";
-import Login from "./components/login/Login";
+import NewRegis from "./components/register/NewRegister";
+import NewLogin from "./components/login/NewLogin";
 import Index from "./components/dashboard/Index";
+import PrivateRoute from "./components/PrivateRoute"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -12,18 +13,9 @@ function App() {
         <React.Fragment>
                 <Router>
                     <Switch>
-                        <Route exact path="/" component={Login}>
-                            <Login />
-                        </Route>
-                        <Route exact path="/login">
-                            <Login />
-                        </Route>
-                        <Route exact path="/register">
-                            <Regis />
-                        </Route>
-                        <Route path="/dashboard">
-                            <Index />
-                        </Route>
+                        <Route exact path="/" component={NewLogin} />
+                        <Route exact path="/register" component={NewRegis} />
+                        <PrivateRoute path="/dashboard" component={Index} />
                     </Switch>
                 </Router>
         </React.Fragment>

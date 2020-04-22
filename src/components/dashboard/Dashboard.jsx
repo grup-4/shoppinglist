@@ -10,11 +10,12 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
 
 import Modal from "./ModalEditUser";
 
 const useStyles = makeStyles({
-    root:{
+    root: {
         flexGrow: 1,
     },
     media: {
@@ -24,25 +25,32 @@ const useStyles = makeStyles({
 
 export default function Dashboard() {
     const classes = useStyles();
+    const [buka, setBuka] = useState(false);
     const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
             const dataLogin = JSON.parse(localStorage.getItem("userLogin"));
+            console.log(dataLogin.id)
+            let list = []
             const response = await fetch(
-                "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/userShop"
+                "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie"
             );
             const result = await response.json();
-            const filterUser = result.find((element) => {
-                return element.id === dataLogin.id && element;
+            result.forEach((element) => {
+                if (element.idKey == dataLogin.id){
+                    list.push(element)
+                }
             });
-            if (filterUser !== undefined) {
-                setData(filterUser);
+            console.log(list, 'element')
+            if(list.length > 0){
+                setData(list)
             }
         };
 
         getData();
+
     }, []);
 
     const handleOpen = () => {
@@ -53,220 +61,82 @@ export default function Dashboard() {
         setOpen(false);
     };
 
+    const handleBuka = () => {
+        setBuka(true);
+    };
+
+    const handleTutup = () => {
+        setBuka(false);
+    };
+
     return (
         <React.Fragment>
-                    <div className={classes.root}>
-            <Grid container spacing={3}>
-                <Grid item xs={2} md={3}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image={data.image}
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="h2"
-                                >
-                                    {data.name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    Lizards are a widespread group of squamate
-                                    reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button
-                                size="small"
-                                color="primary"
-                                onClick={handleOpen}
-                            >
-                                Edit
-                            </Button>
-                            <Button size="small" color="primary">
-                                Learn More
-                            </Button>
-                        </CardActions>
-                        <Modal handleClose={handleClose} open={open} />
+            <Container component="main" maxWidth="lg">
+                <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    style={{ margin: "15px 0" }}
+                    onClick={handleBuka}
+                >
+                    Add Shoping List
+                </Button>
+                <Grid container spacing={2}>
+                    {Array.isArray(data) && data.length > 0
+                        ? data.map((element) => {
+                              return (
+                                  <Grid item xs={2} md={3} key={element.id}>
+                                      <Card>
+                                          <CardActionArea>
+                                              <CardMedia
+                                                  className={classes.media}
+                                                  image={element.image}
+                                                  title="Contemplative Reptile"
+                                              />
+                                              <CardContent>
+                                                  <Typography
+                                                      gutterBottom
+                                                      variant="h5"
+                                                      component="h2"
+                                                  >
+                                                      {element.item}
+                                                  </Typography>
+                                                  <Typography
+                                                      variant="body2"
+                                                      color="textSecondary"
+                                                      component="p"
+                                                  >
+                                                      {element.deskripsi}
+                                                  </Typography>
+                                              </CardContent>
+                                          </CardActionArea>
+                                          <CardActions>
+                                              <Button
+                                                  size="small"
+                                                  color="primary"
+                                                  onClick={handleOpen}
+                                                  variant="contained"
+                                              >
+                                                  Edit
+                                              </Button>
+                                              <Button
+                                                  size="small"
+                                                  color="primary"
+                                                  variant="contained"
+                                              >
+                                                  Learn More
+                                              </Button>
+                                          </CardActions>
+                                      </Card>
+                                  </Grid>
+                              );
+                          })
+                        : "baru"}
+
+                    <Modal handleClose={handleClose} open={open} />
                 </Grid>
-                    </div>
-                <Grid item xs={2} md={3} spacing={3}>
-                    <Card className={classes.root}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image={data.image}
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="h2"
-                                >
-                                    {data.name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    Lizards are a widespread group of squamate
-                                    reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button
-                                size="small"
-                                color="primary"
-                                onClick={handleOpen}
-                            >
-                                Edit
-                            </Button>
-                            <Button size="small" color="primary">
-                                Learn More
-                            </Button>
-                        </CardActions>
-                        <Modal handleClose={handleClose} open={open} />
-                    </Card>
-                </Grid>
-                <Grid item xs={2} md={3} spacing={3}>
-                    <Card className={classes.root}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image={data.image}
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="h2"
-                                >
-                                    {data.name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    Lizards are a widespread group of squamate
-                                    reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button
-                                size="small"
-                                color="primary"
-                                onClick={handleOpen}
-                            >
-                                Edit
-                            </Button>
-                            <Button size="small" color="primary">
-                                Learn More
-                            </Button>
-                        </CardActions>
-                        <Modal handleClose={handleClose} open={open} />
-                    </Card>
-                </Grid>
-                <Grid item xs={2} md={3} spacing={3}>
-                    <Card className={classes.root}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image={data.image}
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="h2"
-                                >
-                                    {data.name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    Lizards are a widespread group of squamate
-                                    reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button
-                                size="small"
-                                color="primary"
-                                onClick={handleOpen}
-                            >
-                                Edit
-                            </Button>
-                            <Button size="small" color="primary">
-                                Learn More
-                            </Button>
-                        </CardActions>
-                        <Modal handleClose={handleClose} open={open} />
-                    </Card>
-                </Grid>
-                <Grid item xs={2} md={3} spacing={3}>
-                    <Card className={classes.root}>
-                        <CardActionArea>
-                            <CardMedia
-                                className={classes.media}
-                                image={data.image}
-                                title="Contemplative Reptile"
-                            />
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="h2"
-                                >
-                                    {data.name}
-                                </Typography>
-                                <Typography
-                                    variant="body2"
-                                    color="textSecondary"
-                                    component="p"
-                                >
-                                    Lizards are a widespread group of squamate
-                                    reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                                </Typography>
-                            </CardContent>
-                        </CardActionArea>
-                        <CardActions>
-                            <Button
-                                size="small"
-                                color="primary"
-                                onClick={handleOpen}
-                            >
-                                Edit
-                            </Button>
-                            <Button size="small" color="primary">
-                                Learn More
-                            </Button>
-                        </CardActions>
-                        <Modal handleClose={handleClose} open={open} />
-                    </Card>
-                </Grid>
-            </Grid>
+            </Container>
+            <Modal handleTutup={handleTutup} buka={buka} />
         </React.Fragment>
     );
 }

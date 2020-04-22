@@ -7,17 +7,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useHistory, Link, useRouteMatch } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -65,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create("width"),
         width: "100%",
@@ -87,7 +82,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+
 export default function Nav() {
+    const history = useHistory();
     let { url } = useRouteMatch();
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -113,6 +110,11 @@ export default function Nav() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const handleLogOut = () => {
+        localStorage.setItem("isLogin", false)
+        history.push("/");        
+    }
+
     const menuId = "primary-search-account-menu";
     const renderMenu = (
         <Menu
@@ -125,11 +127,11 @@ export default function Nav() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>
-                <Link to={`${url}/dashboard`}>
+                <Link to={`${url}/profile`}>
                     <p>My Profile</p>
                 </Link>
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>Sign out</MenuItem>
+            <MenuItem onClick={handleLogOut}>Log out</MenuItem>
         </Menu>
     );
 
@@ -171,7 +173,7 @@ export default function Nav() {
                         variant="h4"
                         color="inherit"
                     >
-                        <Link to={`${url}/edituser`} className={classes.logo}>
+                        <Link to={`${url}/dashboard`} className={classes.logo}>
                             Shoppie
                         </Link>
                     </Typography>
