@@ -38,7 +38,6 @@ export default function Register() {
                     name: data.name,
                     userName: data.userName,
                     email: data.email,
-                    // password: "",
                     createdAt: moment().format("MMMM Do YYYY"),
                 }}
                 enableReinitialize={true}
@@ -70,7 +69,7 @@ export default function Register() {
                                 JSON.stringify(dataLogin)
                             );
                             alert("Edit successfully");
-                            history.push("/dashboard");
+                            history.push("/dashboard/dashboard");
                             window.location.reload()
                         });
                 }}
@@ -171,7 +170,7 @@ export default function Register() {
                             >
                                 Login
                             </Button>
-                            <Link to="/dashboard" style={{marginLeft:"25px",}}>
+                            <Link to="/dashboard/dashboard" style={{marginLeft:"25px",}}>
                             <Button
                                 variant="contained"
                                 color="default"

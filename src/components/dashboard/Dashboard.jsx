@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState} from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -9,26 +9,20 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Grid from '@material-ui/core/Grid';
-import { Link } from "react-router-dom";
-import Modal from './ModalEditUser'
+import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles((theme) => ({
-    modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+import Modal from "./ModalEditUser";
+
+const useStyles = makeStyles({
+    root:{
+        flexGrow: 1,
     },
-    paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
+    media: {
+        height: 250,
     },
-  }));
+});
 
 export default function Dashboard() {
-    // const data = JSON.parse(localStorage.getItem("userLogin"));
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
@@ -49,51 +43,230 @@ export default function Dashboard() {
         };
 
         getData();
-
     }, []);
-  
+
     const handleOpen = () => {
-      setOpen(true);
+        setOpen(true);
     };
-  
+
     const handleClose = () => {
-      setOpen(false);
+        setOpen(false);
     };
 
     return (
-        <Grid item xs={12} md={4} sm container style={{marginTop:"10px",}}>
-        <Card >
-            <CardActionArea>
-                <CardMedia
-                    component="img"
-                    alt="Contemplative Reptile"
-                    height="140"
-                    image={data.image}
-                    title="Contemplative Reptile"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="h2">
-                        {data.name}
-                    </Typography>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        {data.email}
-                    </Typography>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-               <Button size="small" color="primary" onClick={handleOpen}>
-                    Edit
-                </Button>
-                <Button size="small" color="primary">
-                    Learn More
-                </Button>
-            </CardActions>
-        </Card>
-        <Modal handleClose={handleClose} open={open} />
-        </Grid>
+        <React.Fragment>
+                    <div className={classes.root}>
+            <Grid container spacing={3}>
+                <Grid item xs={2} md={3}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image={data.image}
+                                title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h5"
+                                    component="h2"
+                                >
+                                    {data.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    Lizards are a widespread group of squamate
+                                    reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button
+                                size="small"
+                                color="primary"
+                                onClick={handleOpen}
+                            >
+                                Edit
+                            </Button>
+                            <Button size="small" color="primary">
+                                Learn More
+                            </Button>
+                        </CardActions>
+                        <Modal handleClose={handleClose} open={open} />
+                </Grid>
+                    </div>
+                <Grid item xs={2} md={3} spacing={3}>
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image={data.image}
+                                title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h5"
+                                    component="h2"
+                                >
+                                    {data.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    Lizards are a widespread group of squamate
+                                    reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button
+                                size="small"
+                                color="primary"
+                                onClick={handleOpen}
+                            >
+                                Edit
+                            </Button>
+                            <Button size="small" color="primary">
+                                Learn More
+                            </Button>
+                        </CardActions>
+                        <Modal handleClose={handleClose} open={open} />
+                    </Card>
+                </Grid>
+                <Grid item xs={2} md={3} spacing={3}>
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image={data.image}
+                                title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h5"
+                                    component="h2"
+                                >
+                                    {data.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    Lizards are a widespread group of squamate
+                                    reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button
+                                size="small"
+                                color="primary"
+                                onClick={handleOpen}
+                            >
+                                Edit
+                            </Button>
+                            <Button size="small" color="primary">
+                                Learn More
+                            </Button>
+                        </CardActions>
+                        <Modal handleClose={handleClose} open={open} />
+                    </Card>
+                </Grid>
+                <Grid item xs={2} md={3} spacing={3}>
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image={data.image}
+                                title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h5"
+                                    component="h2"
+                                >
+                                    {data.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    Lizards are a widespread group of squamate
+                                    reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button
+                                size="small"
+                                color="primary"
+                                onClick={handleOpen}
+                            >
+                                Edit
+                            </Button>
+                            <Button size="small" color="primary">
+                                Learn More
+                            </Button>
+                        </CardActions>
+                        <Modal handleClose={handleClose} open={open} />
+                    </Card>
+                </Grid>
+                <Grid item xs={2} md={3} spacing={3}>
+                    <Card className={classes.root}>
+                        <CardActionArea>
+                            <CardMedia
+                                className={classes.media}
+                                image={data.image}
+                                title="Contemplative Reptile"
+                            />
+                            <CardContent>
+                                <Typography
+                                    gutterBottom
+                                    variant="h5"
+                                    component="h2"
+                                >
+                                    {data.name}
+                                </Typography>
+                                <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                    component="p"
+                                >
+                                    Lizards are a widespread group of squamate
+                                    reptiles, with over 6,000 species, ranging
+                                    across all continents except Antarctica
+                                </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                            <Button
+                                size="small"
+                                color="primary"
+                                onClick={handleOpen}
+                            >
+                                Edit
+                            </Button>
+                            <Button size="small" color="primary">
+                                Learn More
+                            </Button>
+                        </CardActions>
+                        <Modal handleClose={handleClose} open={open} />
+                    </Card>
+                </Grid>
+            </Grid>
+        </React.Fragment>
     );
 }

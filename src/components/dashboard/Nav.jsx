@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
+    logo: {
+        color: "white",
+        textDecoration: "none",
+    },
     title: {
         display: "none",
         [theme.breakpoints.up("sm")]: {
@@ -120,8 +124,12 @@ export default function Nav() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>
+                <Link to={`${url}/dashboard`}>
+                    <p>My Profile</p>
+                </Link>
+            </MenuItem>
+            <MenuItem onClick={handleMenuClose}>Sign out</MenuItem>
         </Menu>
     );
 
@@ -136,25 +144,6 @@ export default function Nav() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-                <IconButton aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        <MailIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton
-                    aria-label="show 11 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
                     aria-label="account of current user"
@@ -164,7 +153,9 @@ export default function Nav() {
                 >
                     <AccountCircle />
                 </IconButton>
-                <p>Profile</p>
+                <Link to={`${url}/profile`}>
+                    <p>My Profile</p>
+                </Link>
             </MenuItem>
         </Menu>
     );
@@ -175,8 +166,14 @@ export default function Nav() {
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        Shopping List
+                    <Typography
+                        className={classes.title}
+                        variant="h4"
+                        color="inherit"
+                    >
+                        <Link to={`${url}/edituser`} className={classes.logo}>
+                            Shoppie
+                        </Link>
                     </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -191,9 +188,7 @@ export default function Nav() {
                             inputProps={{ "aria-label": "search" }}
                         />
                     </div>
-                    <Typography className={classes.title} variant="h6" noWrap>
-                        <Link to={`${url}/edituser`}>Edit user</Link>
-                    </Typography>
+
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <IconButton

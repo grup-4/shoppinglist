@@ -82,12 +82,7 @@ export default function Login() {
                     }) => {
                         return (
                             <form onSubmit={handleSubmit}>
-                                <Grid
-                                    container
-                                    spacing={3}
-                                    justify="center"
-                                    alignItems="center"
-                                >
+                                
                                     <Grid item>
                                         <TextField
                                             type="email"
@@ -151,7 +146,6 @@ export default function Login() {
                                             Login
                                         </Button>
                                     </Grid>
-                                </Grid>
                                 <p>
                                     Belum punya akun?{" "}
                                     <Link to="/register">SignUp</Link>
