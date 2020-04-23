@@ -37,7 +37,7 @@ export default function Add() {
                             return response.json();
                         })
                         .then((result) => {
-                            history.push("/dashboard/dashboard");
+                            // history.push("/dashboard");
                             window.location.reload();
                         });
                 }}

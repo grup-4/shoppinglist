@@ -17,6 +17,9 @@ const useStyles = makeStyles({
     root: {
         flexGrow: 1,
     },
+    content: {
+        margin: "20px 0",
+    },
 });
 
 export default function Dashboard() {
@@ -53,7 +56,7 @@ export default function Dashboard() {
     return (
         <React.Fragment>
             <Container component="main" maxWidth="lg">
-                <Grid container spacing={2}>
+                <Grid container spacing={2} className={classes.content}>
                     <Grid item xs={12} md={3}>
                         <Card>
                             <CardActionArea>
@@ -64,21 +67,22 @@ export default function Dashboard() {
                                 />
                                 <CardContent>
                                     <Typography
-                                        gutterBottom
+                                        gutterTop
                                         variant="h5"
                                         component="h2"
                                     >
                                         {data.name}
                                     </Typography>
                                     <Typography
-                                        variant="body2"
+                                        gutterBottom
+                                        variant="body5"
                                         color="textSecondary"
                                         component="p"
                                     >
-                                        Lizards are a widespread group of
-                                        squamate reptiles, with over 6,000
-                                        species, ranging across all continents
-                                        except Antarctica
+                                        {data.createdAt}
+                                    </Typography>
+                                    <Typography variant="body2" component="p">
+                                        {data.email}
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -87,10 +91,15 @@ export default function Dashboard() {
                                     size="small"
                                     color="primary"
                                     onClick={handleOpen}
+                                    variant="contained"
                                 >
                                     Edit
                                 </Button>
-                                <Button size="small" color="primary">
+                                <Button
+                                    size="small"
+                                    color="inherit"
+                                    variant="contained"
+                                >
                                     Detail
                                 </Button>
                             </CardActions>

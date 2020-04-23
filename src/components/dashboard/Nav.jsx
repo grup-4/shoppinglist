@@ -173,7 +173,7 @@ export default function Nav() {
                         variant="h4"
                         color="inherit"
                     >
-                        <Link to={`${url}/dashboard`} className={classes.logo}>
+                        <Link to={`${url}`} className={classes.logo}>
                             Shoppie
                         </Link>
                     </Typography>

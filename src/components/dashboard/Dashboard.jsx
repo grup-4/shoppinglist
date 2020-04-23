@@ -21,7 +21,8 @@ import Add from "./content/Add";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
+        // flexGrow: 1,
+        marginBottom: "20px",
     },
     modal: {
         display: "flex",
@@ -94,7 +95,7 @@ export default function Dashboard() {
 
     return (
         <React.Fragment>
-            <Container componenet="main" maxWidth="lg">
+            <Container componenet="main" maxWidth="lg" className={classes.root}>
                 <Button
                     size="large"
                     variant="contained"
@@ -134,7 +135,6 @@ export default function Dashboard() {
                                                       {element.createdAt}
                                                   </Typography>
                                                   <Typography
-                                                      gutterBottom
                                                       variant="body2"
                                                       component="p"
                                                   >
@@ -166,7 +166,7 @@ export default function Dashboard() {
                                   </Grid>
                               );
                           })
-                        : "baru"}
+                        : " "}
                     {/* <Modal handleClose={handleClose} buka={open} id={data.id} /> */}
                 </Grid>
                 {/* <ModalAdd handleTutup={handleTutup} buka={buka} /> */}

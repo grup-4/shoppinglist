@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
-
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
@@ -68,8 +67,7 @@ export default function Register() {
                                 "userLogin",
                                 JSON.stringify(dataLogin)
                             );
-                            alert("Edit successfully");
-                            history.push("/dashboard/dashboard");
+                            history.push("/dashboard/profile");
                             window.location.reload();
                         });
                 }}
@@ -169,14 +167,6 @@ export default function Register() {
                                 disabled={isSubmitting}
                             >
                                 Update
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="default"
-                                type="submit"
-                                style={{ marginLeft: "10px" }}
-                            >
-                                Cancel
                             </Button>
                         </form>
                     );
