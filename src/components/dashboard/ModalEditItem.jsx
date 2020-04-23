@@ -27,17 +27,17 @@ export default function ModalEditItem(props) {
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
-        open={props.buka}
-        onClose={props.handleTutup}
+        open={props.open}
+        onClose={props.handleClose}
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
         }}
       >
-        <Fade in={props.buka}>
+        <Fade in={props.open}>
           <div className={classes.paper}>
-              <Edit data/>
+              <Edit />
           </div>
         </Fade>
       </Modal>

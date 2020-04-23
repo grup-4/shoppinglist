@@ -11,7 +11,8 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Modal from "./ModalEditItem";
+import Modal from "./ModalEditUser";
+import ModalAdd from "./content/Add";
 
 const useStyles = makeStyles({
     root: {
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
 
 export default function Dashboard() {
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
     const [buka, setBuka] = useState(false);
     const [data, setData] = useState([]);
 
@@ -44,7 +46,7 @@ export default function Dashboard() {
         getData();
     }, []);
 
-    console.log(data, 'data')
+    console.log(data, "data");
 
     const handleDelete = async (id) => {
         const url = "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie";
@@ -63,6 +65,13 @@ export default function Dashboard() {
 
     const handleTutup = () => {
         setBuka(false);
+    };
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
@@ -110,7 +119,7 @@ export default function Dashboard() {
                                               <Button
                                                   size="small"
                                                   color="primary"
-                                                  onClick={handleBuka}
+                                                  onClick={handleOpen}
                                                   variant="contained"
                                               >
                                                   Edit
@@ -131,9 +140,10 @@ export default function Dashboard() {
                               );
                           })
                         : "baru"}
+                    <Modal handleClose={handleClose} buka={open} id={data.id}/>
                 </Grid>
+                <ModalAdd handleTutup={handleTutup} buka={buka} />
             </Container>
-            <Modal handleTutup={handleTutup} buka={buka} id={data.id} />
         </React.Fragment>
     );
 }

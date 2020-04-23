@@ -37,10 +37,6 @@ export default function Add() {
                             return response.json();
                         })
                         .then((result) => {
-                            localStorage.setItem(
-                                "userLogin",
-                                JSON.stringify(dataLogin)
-                            );
                             alert("Add item successfully");
                             history.push("/dashboard/dashboard");
                             window.location.reload();
@@ -58,30 +54,7 @@ export default function Add() {
                 }) => {
                     return (
                         <form onSubmit={handleSubmit}>
-                            <div>
-                                <TextField
-                                    type="text"
-                                    name="name"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.name}
-                                    label="Full name"
-                                    margin="normal"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    required
-                                    variant="outlined"
-                                />
-                                <p
-                                    style={{
-                                        color: "red",
-                                        fontStyle: "italic",
-                                    }}
-                                >
-                                    {errors.name && touched.name && errors.name}
-                                </p>
-                            </div>
+                            
                             <div>
                                 <TextField
                                     type="text"
@@ -121,7 +94,6 @@ export default function Add() {
                                         shrink: true,
                                     }}
                                     required
-                                    disabled
                                     variant="outlined"
                                 />
                                 <p
@@ -148,7 +120,6 @@ export default function Add() {
                                         shrink: true,
                                     }}
                                     required
-                                    disabled
                                     variant="outlined"
                                 />
                                 <p
