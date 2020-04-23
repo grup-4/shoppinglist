@@ -17,7 +17,7 @@ function Index() {
         <div>
             <Nav />
             <Switch>
-                <Route path={`${path}/dashboard`}>
+                <Route exact path={`${path}`}>
                     <Dash />
                 </Route>
                 <Route path={`${path}/profile`}>

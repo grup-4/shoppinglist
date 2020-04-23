@@ -100,7 +100,7 @@ export default function Sign() {
                             };
                             swal({
                                 title: "Succes!",
-                                text: `Selamat datang kembali, ${loginUser.name}`,
+                                text: `Selamat datang, ${loginUser.name}`,
                                 icon: "success",
                                 button: "Ok",
                             });
