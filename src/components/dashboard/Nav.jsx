@@ -111,7 +111,7 @@ export default function Nav() {
 
     const handleLogOut = () => {
         localStorage.setItem("isLogin", false);
-        localStorage.removeItem('userLogin')
+        localStorage.removeItem("userLogin");
         history.push("/");
     };
 
@@ -194,10 +194,9 @@ export default function Nav() {
                     <div className={classes.grow} />
                     <Typography
                         className={classes.title}
-                        variant="headline"
                         color="inherit"
+                        variant="overline"
                     >
-                        {" "}
                         {data.name}
                     </Typography>
                     <div className={classes.sectionDesktop}>

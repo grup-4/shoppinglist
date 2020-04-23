@@ -11,9 +11,8 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-// import Modal from "./ModalEditUser";
+import MUser from "./ModalEditItem";
 // import ModalAdd from "./content/Add";
-import swal from "sweetalert";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -45,6 +44,7 @@ export default function Dashboard() {
     const [open, setOpen] = useState(false);
     const [buka, setBuka] = useState(false);
     const [data, setData] = useState([]);
+    const [idItem, setIdItem] = useState("");
 
     useEffect(() => {
         const getData = async () => {
@@ -65,8 +65,6 @@ export default function Dashboard() {
         getData();
     }, []);
 
-    console.log(data, "data");
-
     const handleDelete = async (id) => {
         const url = "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie";
 
@@ -84,9 +82,10 @@ export default function Dashboard() {
     const handleTutup = () => {
         setBuka(false);
     };
-    const handleOpen = () => {
+    const handleOpen = (id) => {
         setOpen(true);
-        console.log(open, "open");
+        setIdItem({ id });
+        localStorage.setItem("idItem", JSON.stringify(id))
     };
 
     const handleClose = () => {
@@ -103,7 +102,7 @@ export default function Dashboard() {
                     style={{ margin: "15px 0" }}
                     onClick={handleBuka}
                 >
-                    Add Shoping List
+                    Add Shopping List
                 </Button>
                 <Grid container spacing={2}>
                     {Array.isArray(data) && data.length > 0
@@ -120,7 +119,6 @@ export default function Dashboard() {
                                               />
                                               <CardContent>
                                                   <Typography
-                                                      gutterTop
                                                       variant="h5"
                                                       component="h2"
                                                   >
@@ -128,7 +126,7 @@ export default function Dashboard() {
                                                   </Typography>
                                                   <Typography
                                                       gutterBottom
-                                                      variant="body5"
+                                                      variant="inherit"
                                                       color="textSecondary"
                                                       component="p"
                                                   >
@@ -146,7 +144,9 @@ export default function Dashboard() {
                                               <Button
                                                   size="small"
                                                   color="inherit"
-                                                  onClick={handleOpen}
+                                                  onClick={() => {
+                                                      handleOpen(element.id);
+                                                  }}
                                                   variant="contained"
                                               >
                                                   Edit
@@ -167,7 +167,12 @@ export default function Dashboard() {
                               );
                           })
                         : " "}
-                    {/* <Modal handleClose={handleClose} buka={open} id={data.id} /> */}
+                    <MUser
+                        handleClose={handleClose}
+                        open={open}
+                        id={idItem}
+                        data={data}
+                    />
                 </Grid>
                 {/* <ModalAdd handleTutup={handleTutup} buka={buka} /> */}
 

@@ -63,19 +63,15 @@ export default function Dashboard() {
                                 <CardMedia
                                     component="img"
                                     image={data.image}
-                                    title="Contemplative Reptile"
+                                    title={data.userName}
                                 />
                                 <CardContent>
-                                    <Typography
-                                        gutterTop
-                                        variant="h5"
-                                        component="h2"
-                                    >
-                                        {data.name}
+                                    <Typography variant="h5" component="h3">
+                                        {data.name}({data.userName})
                                     </Typography>
                                     <Typography
                                         gutterBottom
-                                        variant="body5"
+                                        variant="inherit"
                                         color="textSecondary"
                                         component="p"
                                     >
@@ -94,13 +90,6 @@ export default function Dashboard() {
                                     variant="contained"
                                 >
                                     Edit
-                                </Button>
-                                <Button
-                                    size="small"
-                                    color="inherit"
-                                    variant="contained"
-                                >
-                                    Detail
                                 </Button>
                             </CardActions>
                         </Card>

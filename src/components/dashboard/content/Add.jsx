@@ -1,15 +1,12 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Formik } from "formik";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
-
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 export default function Add() {
-    const history = useHistory();
     const user = JSON.parse(localStorage.getItem('userLogin'))
     return (
         <div>
@@ -37,7 +34,6 @@ export default function Add() {
                             return response.json();
                         })
                         .then((result) => {
-                            // history.push("/dashboard");
                             window.location.reload();
                         });
                 }}
