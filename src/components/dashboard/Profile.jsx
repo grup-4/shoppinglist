@@ -11,15 +11,11 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-
 import Modal from "./ModalEditUser";
 
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
-    },
-    media: {
-        height: 250,
     },
 });
 
@@ -58,11 +54,11 @@ export default function Dashboard() {
         <React.Fragment>
             <Container component="main" maxWidth="lg">
                 <Grid container spacing={2}>
-                    <Grid item xs={2} md={3}>
+                    <Grid item xs={12} md={3}>
                         <Card>
                             <CardActionArea>
                                 <CardMedia
-                                    className={classes.media}
+                                    component="img"
                                     image={data.image}
                                     title="Contemplative Reptile"
                                 />

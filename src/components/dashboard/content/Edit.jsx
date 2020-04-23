@@ -8,18 +8,19 @@ import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-export default function Register() {
+export default function Edit() {
+    const history = useHistory();
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
             const dataLogin = JSON.parse(localStorage.getItem("userLogin"));
             const response = await fetch(
-                "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/userShop"
+                "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/soppie"
             );
             const result = await response.json();
             const filterUser = result.find((element) => {
-                return element.id === dataLogin.id && element;
+                return element.idKey === dataLogin.id && element;
             });
             if (filterUser !== undefined) {
                 setData(filterUser);
@@ -27,48 +28,37 @@ export default function Register() {
         };
 
         getData();
-    }, []);
 
-    const history = useHistory();
+    }, []);
+    
+    console.log(data, "data")
+
     return (
         <div>
-            <h2>Edit profile</h2>
+            <h2>Add item</h2>
             <Formik
                 initialValues={{
-                    name: data.name,
-                    userName: data.userName,
-                    email: data.email,
+                    item: data.item,
+                    deskripsi: data.deskripsi,
+                    image: data.image,
                     createdAt: moment().format("MMMM Do YYYY"),
                 }}
                 enableReinitialize={true}
                 onSubmit={(values) => {
-                    const url = `https://5e8f22bbfe7f2a00165eeedf.mockapi.io/userShop/${data.id}`;
+                    const url = `https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie`;
                     const options = {
                         headers: {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(values),
-                        method: "PUT",
+                        method: "POST",
                     };
-
-                    const dataLogin = {
-                        id: data.id,
-                        name: values.name,
-                        userName: values.userName,
-                        email: data.email,
-                        image: data.image,
-                    };
-
                     fetch(url, options)
                         .then((response) => {
                             return response.json();
                         })
                         .then((result) => {
-                            localStorage.setItem(
-                                "userLogin",
-                                JSON.stringify(dataLogin)
-                            );
-                            alert("Edit successfully");
+                            alert("Edit item successfully");
                             history.push("/dashboard/dashboard");
                             window.location.reload();
                         });
@@ -88,11 +78,11 @@ export default function Register() {
                             <div>
                                 <TextField
                                     type="text"
-                                    name="name"
+                                    name="item"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.name}
-                                    label="Full name"
+                                    value={values.item}
+                                    label="Nama barang"
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
@@ -106,17 +96,17 @@ export default function Register() {
                                         fontStyle: "italic",
                                     }}
                                 >
-                                    {errors.name && touched.name && errors.name}
+                                    {errors.item && touched.item && errors.item}
                                 </p>
                             </div>
                             <div>
                                 <TextField
                                     type="text"
-                                    name="userName"
+                                    name="item"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.userName}
-                                    label="User Name"
+                                    value={values.item}
+                                    label="Nama barang"
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
@@ -130,19 +120,19 @@ export default function Register() {
                                         fontStyle: "italic",
                                     }}
                                 >
-                                    {errors.userName &&
-                                        touched.userName &&
-                                        errors.userName}
+                                    {errors.item &&
+                                        touched.item &&
+                                        errors.item}
                                 </p>
                             </div>
                             <div>
                                 <TextField
-                                    type="email"
-                                    name="email"
+                                    type="text"
+                                    name="deskripsi"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.email}
-                                    label="Email"
+                                    value={values.deskripsi}
+                                    label="Deskripsi"
                                     margin="normal"
                                     InputLabelProps={{
                                         shrink: true,
@@ -157,9 +147,36 @@ export default function Register() {
                                         fontStyle: "italic",
                                     }}
                                 >
-                                    {errors.email &&
-                                        touched.email &&
-                                        errors.email}
+                                    {errors.deskripsi &&
+                                        touched.deskripsi &&
+                                        errors.deskripsi}
+                                </p>
+                            </div>
+                            <div>
+                                <TextField
+                                    type="url"
+                                    name="image"
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.image}
+                                    label="Url gambar"
+                                    margin="normal"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    required
+                                    disabled
+                                    variant="outlined"
+                                />
+                                <p
+                                    style={{
+                                        color: "red",
+                                        fontStyle: "italic",
+                                    }}
+                                >
+                                    {errors.image &&
+                                        touched.image &&
+                                        errors.image}
                                 </p>
                             </div>
                             <Button

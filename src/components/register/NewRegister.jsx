@@ -49,7 +49,11 @@ export default function Sign() {
                     }}
                     validate={(values) => {
                         const errors = {};
-                        if (values.email === "") {
+                        if (values.name === ""){
+                            errors.name = "Nama tidak boleh kosong"
+                        }else if(values.userName === ""){
+                            errors.userName = "Username tidak boleh kosong"
+                        }else if (values.email === "") {
                             errors.email = "Required";
                         } else if (
                             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
@@ -59,7 +63,7 @@ export default function Sign() {
                             errors.email = "Invalid email address";
                         } else if (values.password.length < 8) {
                             errors.password = "Minimum password 8 character";
-                        }
+                        } 
                         return errors;
                     }}
                     onSubmit={(values) => {
@@ -121,9 +125,9 @@ export default function Sign() {
                                                 fontStyle: "italic",
                                             }}
                                         >
-                                            {errors.fullname &&
-                                                touched.fullname &&
-                                                errors.fullname}
+                                            {errors.name &&
+                                                touched.name &&
+                                                errors.name}
                                         </p>
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -148,9 +152,9 @@ export default function Sign() {
                                                 fontStyle: "italic",
                                             }}
                                         >
-                                            {errors.username &&
-                                                touched.username &&
-                                                errors.username}
+                                            {errors.userName &&
+                                                touched.userName &&
+                                                errors.userName}
                                         </p>
                                     </Grid>
                                     <Grid item xs={12}>

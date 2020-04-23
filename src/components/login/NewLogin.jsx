@@ -184,7 +184,7 @@ export default function Sign() {
                                     <Grid item>
                                         <p variant="body2">
                                             Already have an account?{" "}
-                                            <Link to="/register">Sign Up</Link>
+                                            <Link to="/register">Login</Link>
                                         </p>
                                     </Grid>
                                 </Grid>

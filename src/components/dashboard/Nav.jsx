@@ -82,7 +82,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 export default function Nav() {
     const history = useHistory();
     let { url } = useRouteMatch();
@@ -111,9 +110,10 @@ export default function Nav() {
     };
 
     const handleLogOut = () => {
-        localStorage.setItem("isLogin", false)
-        history.push("/");        
-    }
+        localStorage.setItem("isLogin", false);
+        localStorage.removeItem('userLogin')
+        history.push("/");
+    };
 
     const menuId = "primary-search-account-menu";
     const renderMenu = (
@@ -192,6 +192,14 @@ export default function Nav() {
                     </div>
 
                     <div className={classes.grow} />
+                    <Typography
+                        className={classes.title}
+                        variant="headline"
+                        color="inherit"
+                    >
+                        {" "}
+                        {data.name}
+                    </Typography>
                     <div className={classes.sectionDesktop}>
                         <IconButton
                             edge="end"

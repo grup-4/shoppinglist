@@ -11,54 +11,50 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-
-import Modal from "./ModalEditUser";
+import Modal from "./ModalEditItem";
 
 const useStyles = makeStyles({
     root: {
         flexGrow: 1,
-    },
-    media: {
-        height: 250,
     },
 });
 
 export default function Dashboard() {
     const classes = useStyles();
     const [buka, setBuka] = useState(false);
-    const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const getData = async () => {
             const dataLogin = JSON.parse(localStorage.getItem("userLogin"));
-            console.log(dataLogin.id)
-            let list = []
+            console.log(dataLogin.id);
             const response = await fetch(
                 "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie"
             );
+
             const result = await response.json();
-            result.forEach((element) => {
-                if (element.idKey == dataLogin.id){
-                    list.push(element)
-                }
+            const filterUser = result.filter((element) => {
+                return element.idKey === dataLogin.id && element;
             });
-            console.log(list, 'element')
-            if(list.length > 0){
-                setData(list)
+            if (filterUser !== undefined) {
+                setData(filterUser);
             }
         };
 
         getData();
-
     }, []);
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    console.log(data, 'data')
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleDelete = async (id) => {
+        const url = "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie";
+
+        const data = await fetch(`${url}/${id}`, {
+            method: "Delete",
+        });
+        await data.json();
+
+        window.location.reload();
     };
 
     const handleBuka = () => {
@@ -71,7 +67,7 @@ export default function Dashboard() {
 
     return (
         <React.Fragment>
-            <Container component="main" maxWidth="lg">
+            <Container componenet="main" maxWidth="lg">
                 <Button
                     size="large"
                     variant="contained"
@@ -85,11 +81,11 @@ export default function Dashboard() {
                     {Array.isArray(data) && data.length > 0
                         ? data.map((element) => {
                               return (
-                                  <Grid item xs={2} md={3} key={element.id}>
+                                  <Grid item xs={12} md={3} key={element.id}>
                                       <Card>
                                           <CardActionArea>
                                               <CardMedia
-                                                  className={classes.media}
+                                                  component="img"
                                                   image={element.image}
                                                   title="Contemplative Reptile"
                                               />
@@ -114,7 +110,7 @@ export default function Dashboard() {
                                               <Button
                                                   size="small"
                                                   color="primary"
-                                                  onClick={handleOpen}
+                                                  onClick={handleBuka}
                                                   variant="contained"
                                               >
                                                   Edit
@@ -123,8 +119,11 @@ export default function Dashboard() {
                                                   size="small"
                                                   color="primary"
                                                   variant="contained"
+                                                  onClick={() => {
+                                                      handleDelete(element.id);
+                                                  }}
                                               >
-                                                  Learn More
+                                                  Delete
                                               </Button>
                                           </CardActions>
                                       </Card>
@@ -132,11 +131,9 @@ export default function Dashboard() {
                               );
                           })
                         : "baru"}
-
-                    <Modal handleClose={handleClose} open={open} />
                 </Grid>
             </Container>
-            <Modal handleTutup={handleTutup} buka={buka} />
+            <Modal handleTutup={handleTutup} buka={buka} id={data.id} />
         </React.Fragment>
     );
 }
