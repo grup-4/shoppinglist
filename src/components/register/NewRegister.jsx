@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 import { Formik } from "formik";
 import { useHistory, Link } from "react-router-dom";
 import moment from "moment";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -82,7 +83,13 @@ export default function Sign() {
                                 return response.json();
                             })
                             .then((result) => {
-                                alert("register successfully");
+                                
+                            swal({
+                                title: "Succes!",
+                                text: "Berhasil registerasi, silahkan login",
+                                icon: "success",
+                                button: "Ok",
+                            });
                                 history.push("/");
                             });
                     }}
@@ -220,7 +227,7 @@ export default function Sign() {
                                     className={classes.submit}
                                     disabled={isSubmitting}
                                 >
-                                    Sign Up
+                                    Submit
                                 </Button>
                                 <Grid container justify="flex-end">
                                     <Grid item>

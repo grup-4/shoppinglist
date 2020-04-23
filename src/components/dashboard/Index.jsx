@@ -13,7 +13,6 @@ import {
 
 function Index() {
     let { path } = useRouteMatch();
-    console.log(path, "path");
     return (
         <div>
             <Nav />

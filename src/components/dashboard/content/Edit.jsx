@@ -58,7 +58,6 @@ export default function Edit() {
                             return response.json();
                         })
                         .then((result) => {
-                            alert("Edit item successfully");
                             history.push("/dashboard/dashboard");
                             window.location.reload();
                         });

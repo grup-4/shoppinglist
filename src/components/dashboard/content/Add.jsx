@@ -37,7 +37,6 @@ export default function Add() {
                             return response.json();
                         })
                         .then((result) => {
-                            alert("Add item successfully");
                             history.push("/dashboard/dashboard");
                             window.location.reload();
                         });
@@ -140,14 +139,6 @@ export default function Add() {
                                 disabled={isSubmitting}
                             >
                                 Add item
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="default"
-                                type="submit"
-                                style={{ marginLeft: "10px" }}
-                            >
-                                Cancel
                             </Button>
                         </form>
                     );
