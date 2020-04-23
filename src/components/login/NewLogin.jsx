@@ -8,9 +8,10 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import swal from "sweetalert";
 
 import { Formik } from "formik";
-import { useHistory, Link} from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -70,16 +71,25 @@ export default function Sign() {
                             (element) => element.email === values.email
                         );
 
-                        console.log(loginUser === undefined, "email");
-
                         if (loginUser === undefined) {
-                            alert("User tidak ditemukan");
+                            // alert("User tidak ditemukan");
+                            swal({
+                                title: "Alert!",
+                                text: "Email tidak ditemukan!",
+                                icon: "error",
+                                button: "Ok",
+                            });
                             history.push("/register");
                         } else if (
                             loginUser.password !== values.password ||
                             loginUser.email !== values.email
                         ) {
-                            alert("email/password salah");
+                            swal({
+                                title: "Warning!",
+                                text: "Email atau password salah",
+                                icon: "error",
+                                button: "Ok",
+                            });
                         } else {
                             const dataLogin = {
                                 id: loginUser.id,
@@ -88,7 +98,12 @@ export default function Sign() {
                                 email: loginUser.email,
                                 image: loginUser.image,
                             };
-                            alert(`selamat datang kembali ${loginUser.name}`);
+                            swal({
+                                title: "Succes!",
+                                text: `Selamat datang kembali, ${loginUser.name}`,
+                                icon: "success",
+                                button: "Ok",
+                            });
                             localStorage.setItem("isLogin", true);
                             localStorage.setItem(
                                 "userLogin",
@@ -178,13 +193,13 @@ export default function Sign() {
                                     className={classes.submit}
                                     disabled={isSubmitting}
                                 >
-                                    Sign Up
+                                    Submit
                                 </Button>
                                 <Grid container justify="flex-end">
                                     <Grid item>
                                         <p variant="body2">
-                                            Already have an account?{" "}
-                                            <Link to="/register">Login</Link>
+                                            Don't have an account?{" "}
+                                            <Link to="/register">Sign Up</Link>
                                         </p>
                                     </Grid>
                                 </Grid>

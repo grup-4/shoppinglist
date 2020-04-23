@@ -11,14 +11,33 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import Modal from "./ModalEditUser";
-import ModalAdd from "./content/Add";
+// import Modal from "./ModalEditUser";
+// import ModalAdd from "./content/Add";
+import swal from "sweetalert";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import Add from "./content/Add";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-});
+    modal: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: "2px solid #000",
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+    media: {
+        height: "300px",
+    },
+}));
 
 export default function Dashboard() {
     const classes = useStyles();
@@ -29,7 +48,6 @@ export default function Dashboard() {
     useEffect(() => {
         const getData = async () => {
             const dataLogin = JSON.parse(localStorage.getItem("userLogin"));
-            console.log(dataLogin.id);
             const response = await fetch(
                 "https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie"
             );
@@ -55,7 +73,6 @@ export default function Dashboard() {
             method: "Delete",
         });
         await data.json();
-
         window.location.reload();
     };
 
@@ -68,6 +85,7 @@ export default function Dashboard() {
     };
     const handleOpen = () => {
         setOpen(true);
+        console.log(open, "open");
     };
 
     const handleClose = () => {
@@ -94,21 +112,30 @@ export default function Dashboard() {
                                       <Card>
                                           <CardActionArea>
                                               <CardMedia
+                                                  className={classes.media}
                                                   component="img"
                                                   image={element.image}
                                                   title="Contemplative Reptile"
                                               />
                                               <CardContent>
                                                   <Typography
-                                                      gutterBottom
+                                                      gutterTop
                                                       variant="h5"
                                                       component="h2"
                                                   >
                                                       {element.item}
                                                   </Typography>
                                                   <Typography
-                                                      variant="body2"
+                                                      gutterBottom
+                                                      variant="body5"
                                                       color="textSecondary"
+                                                      component="p"
+                                                  >
+                                                      {element.createdAt}
+                                                  </Typography>
+                                                  <Typography
+                                                      gutterBottom
+                                                      variant="body2"
                                                       component="p"
                                                   >
                                                       {element.deskripsi}
@@ -118,7 +145,7 @@ export default function Dashboard() {
                                           <CardActions>
                                               <Button
                                                   size="small"
-                                                  color="primary"
+                                                  color="inherit"
                                                   onClick={handleOpen}
                                                   variant="contained"
                                               >
@@ -126,7 +153,7 @@ export default function Dashboard() {
                                               </Button>
                                               <Button
                                                   size="small"
-                                                  color="primary"
+                                                  color="secondary"
                                                   variant="contained"
                                                   onClick={() => {
                                                       handleDelete(element.id);
@@ -140,9 +167,30 @@ export default function Dashboard() {
                               );
                           })
                         : "baru"}
-                    <Modal handleClose={handleClose} buka={open} id={data.id}/>
+                    {/* <Modal handleClose={handleClose} buka={open} id={data.id} /> */}
                 </Grid>
-                <ModalAdd handleTutup={handleTutup} buka={buka} />
+                {/* <ModalAdd handleTutup={handleTutup} buka={buka} /> */}
+
+                <div>
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        className={classes.modal}
+                        open={buka}
+                        onClose={handleTutup}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                    >
+                        <Fade in={buka}>
+                            <div className={classes.paper}>
+                                <Add />
+                            </div>
+                        </Fade>
+                    </Modal>
+                </div>
             </Container>
         </React.Fragment>
     );
