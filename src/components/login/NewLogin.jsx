@@ -109,7 +109,7 @@ export default function Sign() {
                                 "userLogin",
                                 JSON.stringify(dataLogin)
                             );
-                            history.push("/dashboard");
+                            history.push("/");
                         }
                     }}
                 >

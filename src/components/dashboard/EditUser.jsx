@@ -67,7 +67,7 @@ export default function Register() {
                                 "userLogin",
                                 JSON.stringify(dataLogin)
                             );
-                            history.push("/dashboard/profile");
+                            history.push("/profile");
                             window.location.reload();
                         });
                 }}

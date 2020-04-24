@@ -90,7 +90,7 @@ export default function Sign() {
                                 icon: "success",
                                 button: "Ok",
                             });
-                                history.push("/");
+                                history.push("/login");
                             });
                     }}
                 >

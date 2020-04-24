@@ -12,15 +12,10 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import MUser from "./ModalEditItem";
-// import ModalAdd from "./content/Add";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import Add from "./content/Add";
+import ModalAdd from "./ModalAddItem";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        // flexGrow: 1,
         marginBottom: "20px",
     },
     modal: {
@@ -100,7 +95,7 @@ export default function Dashboard() {
                     variant="contained"
                     color="primary"
                     style={{ margin: "15px 0" }}
-                    onClick={handleBuka}
+                    onClick={() => {handleBuka()}}
                 >
                     Add Shopping List
                 </Button>
@@ -174,28 +169,7 @@ export default function Dashboard() {
                         data={data}
                     />
                 </Grid>
-                {/* <ModalAdd handleTutup={handleTutup} buka={buka} /> */}
-
-                <div>
-                    <Modal
-                        aria-labelledby="transition-modal-title"
-                        aria-describedby="transition-modal-description"
-                        className={classes.modal}
-                        open={buka}
-                        onClose={handleTutup}
-                        closeAfterTransition
-                        BackdropComponent={Backdrop}
-                        BackdropProps={{
-                            timeout: 500,
-                        }}
-                    >
-                        <Fade in={buka}>
-                            <div className={classes.paper}>
-                                <Add />
-                            </div>
-                        </Fade>
-                    </Modal>
-                </div>
+                <ModalAdd handleTutup={handleTutup} buka={buka} />
             </Container>
         </React.Fragment>
     );

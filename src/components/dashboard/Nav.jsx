@@ -13,7 +13,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Avatar from "@material-ui/core/Avatar";
-import { useHistory, Link, useRouteMatch } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -84,7 +84,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Nav() {
     const history = useHistory();
-    let { url } = useRouteMatch();
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -112,7 +111,7 @@ export default function Nav() {
     const handleLogOut = () => {
         localStorage.setItem("isLogin", false);
         localStorage.removeItem("userLogin");
-        history.push("/");
+        history.push("/login");
     };
 
     const menuId = "primary-search-account-menu";
@@ -127,7 +126,7 @@ export default function Nav() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>
-                <Link to={`${url}/profile`}>
+                <Link to="/profile">
                     <p>My Profile</p>
                 </Link>
             </MenuItem>
@@ -155,7 +154,7 @@ export default function Nav() {
                 >
                     <AccountCircle />
                 </IconButton>
-                <Link to={`${url}/profile`}>
+                <Link to="/profile">
                     <p>My Profile</p>
                 </Link>
             </MenuItem>
@@ -173,7 +172,7 @@ export default function Nav() {
                         variant="h4"
                         color="inherit"
                     >
-                        <Link to={`${url}`} className={classes.logo}>
+                        <Link to="/" className={classes.logo}>
                             Shoppie
                         </Link>
                     </Typography>

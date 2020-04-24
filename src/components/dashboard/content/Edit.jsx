@@ -8,15 +8,15 @@ import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-export default function Edit(props, id) {
+export default function Edit(props) {
     const history = useHistory();
     const [data, setData] = useState([]);
+    const [id, setId] = useState(props.id.id)
 
-    useEffect((id) => {
-        const getData = async (id) => {
-            const idItem = JSON.parse(localStorage.getItem("idItem"))
+    useEffect(() => {
+        const getData = async () => {
             const response = await fetch(
-                `https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie/${idItem}`
+                `https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie/${id}`
             );
             const result = await response.json();
             if (result !== undefined) {
@@ -25,7 +25,7 @@ export default function Edit(props, id) {
         };
 
         getData();
-    }, []);
+    }, [id]);
 
     return (
         <div>
@@ -52,7 +52,7 @@ export default function Edit(props, id) {
                             return response.json();
                         })
                         .then((result) => {
-                            history.push("/dashboard");
+                            history.push("/");
                             localStorage.removeItem('idItem')
                             window.location.reload();
                         });
