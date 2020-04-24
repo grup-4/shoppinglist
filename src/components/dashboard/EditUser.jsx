@@ -40,6 +40,25 @@ export default function Register() {
                     createdAt: moment().format("MMMM Do YYYY"),
                 }}
                 enableReinitialize={true}
+                validate={(values) => {
+                    const errors = {};
+                    if (values.name === ""){
+                        errors.name = "Nama tidak boleh kosong"
+                    }else if(values.userName === ""){
+                        errors.userName = "Username tidak boleh kosong"
+                    }else if (values.email === "") {
+                        errors.email = "Required";
+                    } else if (
+                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                            values.email
+                        )
+                    ) {
+                        errors.email = "Invalid email address";
+                    } else if (values.password.length < 8) {
+                        errors.password = "Minimum password 8 character";
+                    } 
+                    return errors;
+                }}
                 onSubmit={(values) => {
                     const url = `https://5e8f22bbfe7f2a00165eeedf.mockapi.io/userShop/${data.id}`;
                     const options = {

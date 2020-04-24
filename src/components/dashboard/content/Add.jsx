@@ -20,6 +20,15 @@ export default function Add() {
                     idKey: user.id,
                 }}
                 enableReinitialize={true}
+                validate={(values) => {
+                    const errors = {};
+                    if (values.item === ""){
+                        errors.item = "Barang tidak boleh kosong"
+                    }else if(values.deskripsi === ""){
+                        errors.deskripsi = "Deskripsi tidak boleh kosong"
+                    }
+                    return errors;
+                }}
                 onSubmit={(values) => {
                     const url = `https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie`;
                     const options = {
@@ -71,9 +80,9 @@ export default function Add() {
                                         fontStyle: "italic",
                                     }}
                                 >
-                                    {errors.userName &&
-                                        touched.userName &&
-                                        errors.userName}
+                                    {errors.item&&
+                                        touched.item &&
+                                        errors.item}
                                 </p>
                             </div>
                             <div>
@@ -97,9 +106,9 @@ export default function Add() {
                                         fontStyle: "italic",
                                     }}
                                 >
-                                    {errors.email &&
-                                        touched.email &&
-                                        errors.email}
+                                    {errors.deskripsi &&
+                                        touched.deskripsi &&
+                                        errors.deskripsi}
                                 </p>
                             </div>
                             <div>
@@ -117,16 +126,6 @@ export default function Add() {
                                     required
                                     variant="outlined"
                                 />
-                                <p
-                                    style={{
-                                        color: "red",
-                                        fontStyle: "italic",
-                                    }}
-                                >
-                                    {errors.email &&
-                                        touched.email &&
-                                        errors.email}
-                                </p>
                             </div>
                             <Button
                                 variant="contained"

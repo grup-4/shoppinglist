@@ -38,6 +38,15 @@ export default function Edit(props) {
                     createdAt: moment().format("MMMM Do YYYY"),
                 }}
                 enableReinitialize={true}
+                validate={(values) => {
+                    const errors = {};
+                    if (values.item === ""){
+                        errors.item = "Barang tidak boleh kosong"
+                    }else if(values.deskripsi === ""){
+                        errors.deskripsi = "Deskripsi tidak boleh kosong"
+                    }
+                    return errors;
+                }}
                 onSubmit={(values) => {
                     const url = `https://5e8f22bbfe7f2a00165eeedf.mockapi.io/shoppie/${data.id}`;
                     const options = {
