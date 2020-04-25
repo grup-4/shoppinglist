@@ -54,9 +54,7 @@ export default function Register() {
                         )
                     ) {
                         errors.email = "Invalid email address";
-                    } else if (values.password.length < 8) {
-                        errors.password = "Minimum password 8 character";
-                    } 
+                    }
                     return errors;
                 }}
                 onSubmit={(values) => {
