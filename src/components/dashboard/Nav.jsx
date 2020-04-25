@@ -26,12 +26,6 @@ const useStyles = makeStyles((theme) => ({
         color: "white",
         textDecoration: "none",
     },
-    // title: {
-    //     display: "none",
-    //     // [theme.breakpoints.up("sm")]: {
-    //     //     display: "block",
-    //     // },
-    // },
     search: {
         "position": "relative",
         "borderRadius": theme.shape.borderRadius,
@@ -43,11 +37,11 @@ const useStyles = makeStyles((theme) => ({
         "marginLeft": 0,
         "width": "100%",
 
-        "display":"none",
+        "display": "none",
         [theme.breakpoints.up("sm")]: {
             marginLeft: theme.spacing(3),
             width: "auto",
-            display:"block"
+            display: "block",
         },
     },
     searchIcon: {
@@ -129,11 +123,29 @@ export default function Nav() {
             onClose={handleMenuClose}
         >
             <MenuItem onClick={handleMenuClose}>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
                 <Link to="/profile">
                     <p>My Profile</p>
                 </Link>
             </MenuItem>
-            <MenuItem onClick={handleLogOut}>Log out</MenuItem>
+            <MenuItem onClick={handleLogOut}>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                Log out
+            </MenuItem>
         </Menu>
     );
 
@@ -148,7 +160,7 @@ export default function Nav() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem onClick={handleProfileMenuOpen}>
+            <MenuItem onClick={handleMobileMenuClose}>
                 <IconButton
                     aria-label="account of current user"
                     aria-controls="primary-search-account-menu"
@@ -160,6 +172,17 @@ export default function Nav() {
                 <Link to="/profile">
                     <p>My Profile</p>
                 </Link>
+            </MenuItem>
+            <MenuItem onClick={handleLogOut}>
+                <IconButton
+                    aria-label="account of current user"
+                    aria-controls="primary-search-account-menu"
+                    aria-haspopup="true"
+                    color="inherit"
+                >
+                    <AccountCircle />
+                </IconButton>
+                Log out
             </MenuItem>
         </Menu>
     );
