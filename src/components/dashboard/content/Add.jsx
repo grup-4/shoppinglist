@@ -6,7 +6,7 @@ import moment from "moment";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-export default function Add() {
+export default function Add(props) {
     const user = JSON.parse(localStorage.getItem('userLogin'))
     return (
         <div>
@@ -134,6 +134,13 @@ export default function Add() {
                                 disabled={isSubmitting}
                             >
                                 Add item
+                            </Button>
+                            <Button style={{marginLeft:"10px"}}
+                                variant="contained"
+                                color="inherit"
+                                onClick={props.tutup}
+                            >
+                                Cancel
                             </Button>
                         </form>
                     );

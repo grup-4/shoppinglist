@@ -39,7 +39,7 @@ export default function ModalEditUser(props) {
             >
                 <Fade in={props.open}>
                     <div className={classes.paper}>
-                        <EditUser />
+                        <EditUser close={props.handleClose} />
                     </div>
                 </Fade>
             </Modal>

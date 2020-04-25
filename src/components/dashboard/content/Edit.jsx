@@ -162,6 +162,13 @@ export default function Edit(props) {
                             >
                                 Update
                             </Button>
+                            <Button style={{marginLeft:"10px"}}
+                                variant="contained"
+                                color="inherit"
+                                onClick={props.close}
+                            >
+                                Cancel
+                            </Button>
                         </form>
                     );
                 }}

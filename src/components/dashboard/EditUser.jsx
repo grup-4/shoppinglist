@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-export default function Register() {
+export default function Register(props) {
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -184,6 +184,13 @@ export default function Register() {
                                 disabled={isSubmitting}
                             >
                                 Update
+                            </Button>
+                            <Button style={{marginLeft:"10px"}}
+                                variant="contained"
+                                color="inherit"
+                                onClick={props.close}
+                            >
+                                Cancel
                             </Button>
                         </form>
                     );

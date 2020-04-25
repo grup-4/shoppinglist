@@ -37,7 +37,7 @@ export default function ModalEditItem(props) {
       >
         <Fade in={props.open}>
           <div className={classes.paper}>
-              <Edit data={props.data} id={props.id}/>
+              <Edit data={props.data} id={props.id} close={props.handleClose}/>
           </div>
         </Fade>
       </Modal>

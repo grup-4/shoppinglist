@@ -39,7 +39,7 @@ export default function ModalAddItem(props) {
             >
                 <Fade in={props.buka}>
                     <div className={classes.paper}>
-                        <Add />
+                        <Add tutup={props.handleTutup} />
                     </div>
                 </Fade>
             </Modal>
