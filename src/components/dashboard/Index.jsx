@@ -19,7 +19,7 @@ function Index() {
                 <Route exact path={`${path}`}>
                     <Dash />
                 </Route>
-                <Route path="/profile">
+                <Route exact path="/profile">
                     <Profile />
                 </Route>
             </Switch>
