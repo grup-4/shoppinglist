@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { Formik } from "formik";
 import moment from "moment";
-import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
@@ -28,7 +27,6 @@ export default function Register(props) {
         getData();
     }, []);
 
-    const history = useHistory();
     return (
         <div>
             <h2>Edit profile</h2>
@@ -84,7 +82,6 @@ export default function Register(props) {
                                 "userLogin",
                                 JSON.stringify(dataLogin)
                             );
-                            history.push("/profile");
                             window.location.reload();
                         });
                 }}
