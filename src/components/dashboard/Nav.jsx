@@ -26,12 +26,12 @@ const useStyles = makeStyles((theme) => ({
         color: "white",
         textDecoration: "none",
     },
-    title: {
-        display: "none",
-        [theme.breakpoints.up("sm")]: {
-            display: "block",
-        },
-    },
+    // title: {
+    //     display: "none",
+    //     // [theme.breakpoints.up("sm")]: {
+    //     //     display: "block",
+    //     // },
+    // },
     search: {
         "position": "relative",
         "borderRadius": theme.shape.borderRadius,
@@ -42,9 +42,12 @@ const useStyles = makeStyles((theme) => ({
         "marginRight": theme.spacing(2),
         "marginLeft": 0,
         "width": "100%",
+
+        "display":"none",
         [theme.breakpoints.up("sm")]: {
             marginLeft: theme.spacing(3),
             width: "auto",
+            display:"block"
         },
     },
     searchIcon: {

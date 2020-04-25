@@ -80,7 +80,6 @@ export default function Dashboard() {
     const handleOpen = (id) => {
         setOpen(true);
         setIdItem({ id });
-        localStorage.setItem("idItem", JSON.stringify(id))
     };
 
     const handleClose = () => {

@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         flexGrow: 1,
     },
     content: {
-        margin: "20px 0",
+        marginTop: "20px",
     },
 });
 
