@@ -15,7 +15,7 @@ function App() {
                     <Switch>
                         <Route path="/register" component={NewRegis} />
                         <Route path="/login" component={NewLogin} />
-                        <PrivateRoute exact path="/" component={Index} />
+                        <PrivateRoute path="/" component={Index} />
                     </Switch>
                 </Router>
         </React.Fragment>
